@@ -1,30 +1,14 @@
 const express=require('express')
 const app=express()
 const bodyParser=require('body-parser')
-const mysql=require('mysql')
+const cors=require('cors')
+require('dotenv').config()
 
-const db=mysql.createConnection({
-    host     : 'localhost',
-    user     : 'your username',
-    password : 'yourpass',
-    database : 'your database',
-    port:3306,
-})
-
-db.connect((err)=>{
-    if(err){
-        console.log(err)
-    }else{
-        console.log('success')
-    }
-})
-
+app.use(cors())
 app.use(bodyParser.json())
-
-const {ProductRoutes}=require('./Routes')
-
-
-
+app.use(bodyParser.urlencoded({ extended: false }));//buat user kirim data ke server
+app.use(express.static('public'))
+// /coding/fotoaja.png
 
 app.get('/',(req,res)=>{
     var dataku={
@@ -32,24 +16,10 @@ app.get('/',(req,res)=>{
     }
     res.send('<h1>selamat datang di api kitas</h1>')
 })
+const {ProductRoutes,KaryawanRoutes}=require('./Routes')
 
-app.get('/karyawan/:id',(req,res)=>{
-    db.query(`select * from karyawan where no= ?`,[req.params.id],(err,results)=>{
-        if (err) return res.status(500).send(err)
-        res.send(results[0])
-    })
-})
-
-app.post('/users',(req,res)=>{
-    console.log(req.body)
-
-    res.status(200).send(req.body)
-})
-app.get('/users',(req,res)=>{
-
-    res.status(200).send('ddddd')
-})
 app.use('/products',ProductRoutes)
+app.use('/toko',KaryawanRoutes)
 
 // // http://localhost:5000/getdata?nama=robin&usia=23 contoh query
 // // ?nama=robin&usia=23 contoh query

@@ -31,6 +31,11 @@ const database=[
 
 Router.get('/',(req,res)=>{
     // var namaProd=req.query.namaProd
+    // {
+    //     namaProd:'popok',
+    //     hargamin:'15000',
+    //     hargamax:'50000'
+    // }
     // var hargamin=req.query.hargamin
     // var hargamax=req.query.hargamax
     var {namaProd,hargamin,hargamax}=req.query
@@ -55,6 +60,7 @@ Router.get('/',(req,res)=>{
         res.send(database)
     }
 })
+
 Router.post('/',(req,res)=>{
     var {namaProd,deskripsi,harga}=req.body
     if(namaProd||deskripsi||harga){
@@ -70,9 +76,9 @@ Router.post('/',(req,res)=>{
     }
 })
 Router.put('/:id',(req,res)=>{
-    // var {id}=req.params
-    // var index=database.findIndex((val)=>val.id==id)
-    // database[index]={...database[index],...req.body}
+    var {id}=req.params
+    var index=database.findIndex((val)=>val.id==id)
+    database[index]={...database[index],...req.body}
     res.send(database)
 })
 Router.delete('/:id',(req,res)=>{
