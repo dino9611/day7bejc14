@@ -10,11 +10,19 @@ module.exports={
         })
     },
     getallKaryawan:(req,res)=>{
-        var sql=`select * from karyawan`
+        var {page}=req.query
+        var sql
+        if(page){
+            page=parseInt(page)
+            sql=`select * from karyawan limit ${(page-1)*5},5` //5 itu jumlah tiap page
+        }else{
+            sql=`select * from karyawan`
+        }
         db.query(sql,(err,results)=>{
             if (err){
                 return res.status(500).send(err)
             }
+            console.log(results)
             return res.status(200).send(results)
         })
     },
