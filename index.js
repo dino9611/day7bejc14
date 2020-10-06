@@ -2,9 +2,11 @@ const express=require('express')
 const app=express()
 const bodyParser=require('body-parser')
 const cors=require('cors')
+const bearerToken=require('express-bearer-token')
 require('dotenv').config()
 
 app.use(cors())
+app.use(bearerToken())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }));//buat user kirim data ke server
 app.use(express.static('public'))

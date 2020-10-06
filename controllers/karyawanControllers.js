@@ -22,7 +22,7 @@ module.exports={
             if (err){
                 return res.status(500).send(err)
             }
-            console.log(results)
+            // console.log(results)
             return res.status(200).send(results)
         })
     },
