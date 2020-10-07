@@ -91,12 +91,13 @@ module.exports={
         let dataedit={
             isverified:true
         }
-        let sql=`update users set ? where id = ${db.escape(id)}`
+        let sql=`update users set ? where id = ${db.escape(id)}` //db.escape mirip ? 
         db.query(sql,dataedit,(err)=>{
             if (err) return res.status(500).send({message:err.message})
             sql=`select * from users where id = ${db.escape(id)}`
             db.query(sql,(err,results)=>{
                 if (err) return res.status(500).send({message:err.message})
+                results[0].token=req.token
                 res.send(results[0])
             })
         })
@@ -122,5 +123,15 @@ module.exports={
             return res.send(true)
         })
 
+    },
+    keeplogin:(req,res)=>{
+        const {id}=req.params
+        db.query(`select * from users where id = ?`,[id],(err,datauser)=>{
+            if (err) return res.status(500).send({message:err.message})
+            const token=createJWToken({id:datauser[0].id,username:datauser[0].username})
+            // add property token to datauser[0] obj 
+            datauser[0].token=token
+            return res.send(datauser[0])    
+        })
     }
 }
