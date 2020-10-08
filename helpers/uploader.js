@@ -6,7 +6,7 @@ module.exports={
         // destinition : tempat dimana foto bakal disimpan
         // filenamePrefix:itu nama depan filenyaa 
         let defaultPath = './public'; //
- 
+        
         const storage = multer.diskStorage({
             destination: (req, file, cb) => {
                 const dir = defaultPath + destination;
@@ -26,6 +26,7 @@ module.exports={
                 cb(null, filename);
             }
         });
+
         const imageFilter = (req, file, callback) => {
             const ext = /\.(jpg|jpeg|png|gif|pdf|doc|docx|xlsx)$/;//regex
             if (!file.originalname.match(ext)) {
@@ -37,9 +38,9 @@ module.exports={
         return multer({
             storage: storage,
             fileFilter: imageFilter,
-            // limits:{
-            //     fileSize: 1 * 1024 * 1024 // 1MB
-            // }
+            limits:{
+                fileSize: 1 * 1024 * 1024 // 1MB
+            }
         });
     }
 }
