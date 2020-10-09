@@ -18,12 +18,13 @@ app.get('/',(req,res)=>{
     }
     res.send('<h1>selamat datang di api kitas</h1>')
 })
-const {ProductRoutes,KaryawanRoutes,AuthRoutes,ProductsRoutes}=require('./Routes')
+const {ProductRoutes,KaryawanRoutes,AuthRoutes,ProductsRoutes,MongoRoutes}=require('./Routes')
 
 app.use('/products',ProductRoutes)
 app.use('/toko',KaryawanRoutes)
 app.use('/auth',AuthRoutes)
 app.use('/prod',ProductsRoutes)
+app.use('/mongo',MongoRoutes)
 
 const Crypto=require('crypto')
 
