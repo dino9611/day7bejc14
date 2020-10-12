@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const {ObjectID} =require('mongodb')
-const uri = "mongodb+srv://dino9611:pwdk123@cluster0.ydv5x.mongodb.net/movies?retryWrites=true&w=majority";
 // const client = new MongoClient(uri, { useNewUrlParser: true ,useUnifiedTopology:true});
+const uri = "mongodb+srv://dino9611:pwdk123@cluster0.ydv5x.mongodb.net/toko?retryWrites=true&w=majority";
 
 
 module.exports={
