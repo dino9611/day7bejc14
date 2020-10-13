@@ -75,7 +75,7 @@ io.on('connection', socket => {
 })
 
 server.listen(PORT,()=>{
-    console.log('Api Aktif di Port 5000')
+    console.log('Api Aktif di Port '+PORT)
     // Logger.info(`Express runninng, Listening in port ${5000}`);
 })
 
