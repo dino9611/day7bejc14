@@ -4,7 +4,7 @@ module.exports = {
     },
     sendMessage: (req,res) => {
         req.app.arrMsg.push(req.body)
-        req.app.io.emit('chat message', req.app.arrMsg)
+        req.app.io.emit('chat message', req.app.arrMsg)//dikriimkan array
         res.status(200).send({ message: 'Send Message Success'})
     },
     clearMessages: (req,res) => {

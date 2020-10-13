@@ -9,6 +9,7 @@ const socketIO=require('socket.io')
 // const Logger= require('./logger/logservice')
 require('dotenv').config()
 
+const PORT = process.env.PORT || 5000
 
 // Passes morgan logs to winston then outputs to combined.log file
 // app.use(morgan("combined", { stream: Logger.stream }));
@@ -73,7 +74,7 @@ io.on('connection', socket => {
     })
 })
 
-server.listen(5000,()=>{
+server.listen(PORT,()=>{
     console.log('Api Aktif di Port 5000')
     // Logger.info(`Express runninng, Listening in port ${5000}`);
 })
